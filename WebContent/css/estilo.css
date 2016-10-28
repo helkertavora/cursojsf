@@ -1,0 +1,54 @@
+
+.formu{
+	text-align: left;
+	margin-left: 450px;
+}
+.titu{
+	font-size: 90%;
+	color: red;
+	font-family: Arial;
+	font-weight: bold;	
+	letter-spacing: 10px;
+}
+
+.ui-column-title {
+	color: maroon;
+	
+	
+}
+
+.alinhamento {
+	text-align: center;
+	color: green;
+	font-weight: bold;
+}
+
+ .cell-block{
+          width:100px;
+          height: 80px;
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          float: left;
+          text-align: center;
+        }
+
+        .top-left, .top-right{
+          border-bottom: 1px solid black;
+        }
+        .top-center{
+          border-bottom: 1px solid black;
+          border-left: 1px solid black;
+          border-right: 1px solid black;
+        }
+        .bottom-center{
+          border-left: 1px solid black;
+          border-right: 1px solid black;
+        }
+        .gamePosition{
+          width: 100%;
+          height: 100%;
+          display: block;
+          font-size: 50px;
+          margin-top: 10px;
+        }

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+ <script src="bootstrap/js/bootstrap.min.js"></script>
+ <script src="bootstrap/js/bootstrap.js"></script>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+ <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+ <script src="bootstrap/js/bootstrap.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<title><h:outputText
+			value=": #{msg['application.name']} - #{msg['application.version']} : " />
+		<ui:insert name="title" /></title>
+	<h:outputStylesheet name="css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+</h:head>
+<h:body>
+	<h3>
+		<h:graphicImage value="#{resource['img:icon_java.gif']}" />
+		<ui:insert name="title" />
+	 </h3>	
+<h:form>
+    <p:growl id="messages" showDetail="true"/>
+    <p:menuButton value="#{msg['page.ajuda.title']}" >
+        <p:menuitem value="#{msg['page.ajuda.title']}" action="ajuda?faces-redirect=true" update="messages" />
+    </p:menuButton>
+    <p:menuButton value="#{msg['page.guess.title']}" >
+        <p:menuitem value="#{msg['page.guess.title']}" action="#{guessBean.init}" update="messages" /> 
+    </p:menuButton>
+    <p:menuButton value="#{msg['page.number.title']}"  >
+        <p:menuitem value="#{msg['page.number.title']}" action="number?faces-redirect=true" update="messages" />
+    </p:menuButton>
+    <p:menuButton value="jogo da velha"  >
+        <p:menuitem value="jogo da velha"  action="jogo?faces-redirect=true" update="messages" />
+    </p:menuButton>
+    <p:menuButton value="#{msg['page.usuarios.title']}"  >
+        <p:menuitem value="#{msg['page.usuarios.title']}"  action="usuarios?faces-redirect=true" update="messages" />
+    </p:menuButton>
+    <p:menuButton value="#{msg['page.logout.title']}"   >
+        <p:menuitem value="#{msg['page.logout.title']}" action="logout?faces-redirect=true" update="messages" />
+    </p:menuButton>
+</h:form>
+	<ui:insert name="body" />
+</h:body>
+</html>

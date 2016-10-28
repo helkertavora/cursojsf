@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="welcome.xhtml">
+	<ui:define name="centro">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"  href="css/estilo.css"/>  
+	<title>#{msg['page.cidades.title']}</title>
+</h:head>
+<p:fieldset legend="#{msg['page.cidades.title']}" toggleable="true">
+<h:body>
+<center>
+<p:messages globalOnly="true" errorStyle="color:red"/>
+	
+	<h:form id="cidadeForm">
+	<h:inputHidden value="#{cidadeBean.cidade.id}" />
+	 <p:growl id="growl"/>	
+	  <p:panelGrid columns="3" id="grid" >
+	  	<p:outputLabel value="#{msg['page.estados.label.id']}:" />
+		<p:inputText id="idInput"  style="width:15%" disabled="true"/>
+	  	
+		<br />
+		<h:outputLabel for="nomeInput"
+				value="#{msg['page.cidades.label.nome']}:" />
+		<p:inputText id="nomeInput" value="#{cidadeBean.cidade.nome}" required="true"/>
+		<p:message for="nomeInput" />
+		
+		<h:outputLabel for="populacaoInput" value="#{msg['page.cidades.label.populacao']}:" />
+		<p:inputText id="populacaoInput"  value="#{cidadeBean.cidade.populacao}" required="true" />
+		<p:message for="populacaoInput"/>
+		
+		<h:outputLabel for="dataConstituicaoInput"
+				value="#{msg['page.cidades.label.dataConstituicao']}:" />
+		<p:inputMask id="dataConstituicaoInput" value="#{cidadeBean.cidade.dataConstituicao}" required="true" 
+		mask="99/99/9999" >
+		<f:convertDateTime pattern="dd/MM/yyyy" />
+		</p:inputMask>
+		<p:message for="dataConstituicaoInput" />
+		
+		<h:outputLabel for="pibInput" value="#{msg['page.cidades.label.pip']}:" />
+		<p:inputText id="pibInput"  value="#{cidadeBean.cidade.pib}" required="true" />
+		<p:message for="pibInput"/>	
+		
+		<p:outputLabel value="#{msg['page.estados.title']}:"  />
+        <p:selectOneMenu id="estadoInput" value="#{cidadeBean.cidade.estado}" converter="#{ufConvert}"
+        required="true" requiredMessage="O campo Produto e obrigatorio!">
+			<f:selectItem  itemLabel="Selecione" itemValue="" />
+			<f:selectItems value="#{ufBean.listaEstados}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}"/>				  			
+			</p:selectOneMenu>			  
+        <p:message for="estadoInput"/>	
+		
+		</p:panelGrid>
+		<p:separator style="background:#FF1493; width: 80%; height: 5px " />
+				
+		<p:commandButton value="#{msg['commons.salvar']}"  actionListener="#{cidadeBean.gravar}" update="grid, growl" 
+		 action="estadoEditar?faces-redirect=true" style="background:#0000CD; color:#FFFFFF" /> &nbsp;
+		 		
+		<p:commandButton style="background:#006400; color:#FFFFFF" action="estado?faces-redirect=true"  value="#{msg['commons.voltar']}" 
+		immediate="true" />&nbsp;
+		
+		<p:commandButton value="limpar" type="reset" style="color: red"/>
+	</h:form>
+	<p:separator style="background:#FF1493; width: 90%; height: 5px " />
+</center>
+	<br />
+		</h:body>
+		
+	   </p:fieldset>
+	   <p:graphicImage value="/imagens/brasil.png" width="1100" height="540"/>
+	  </ui:define>
+	</ui:decorate>
+</html>

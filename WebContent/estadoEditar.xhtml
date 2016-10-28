@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="welcome.xhtml">
+	<ui:define name="centro">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"  href="css/estilo.css"/>  
+	<title>#{msg['page.estados.title']}</title>
+</h:head>
+<p:fieldset legend="#{msg['page.usuariosEditar.title']}" toggleable="true">
+<h:body>
+<center>
+<p:messages globalOnly="true" errorStyle="color:red"/>
+	
+	<h:form id="estadosForm">
+	<h:inputHidden value="#{ufBean.estados.id}" />
+	 <p:growl id="growl"/>	
+	  <p:panelGrid columns="3" id="grid" >
+		<p:outputLabel value="#{msg['page.estados.label.id']}:" />
+		<p:inputText id="id" disabled="true" style="width:15%" />
+		<br />
+		<h:outputLabel for="nomeInput"
+				value="#{msg['page.estados.label.nome']}:" />
+		<p:inputText id="nomeInput" value="#{ufBean.estados.nome}" required="true"/>
+		<p:message for="nomeInput" />
+		
+		<h:outputLabel for="siglaInput" value="#{msg['page.estados.label.sigla']}:" />
+		<p:inputText id="siglaInput"  value="#{ufBean.estados.sigla}" required="true" />
+		<p:message for="siglaInput"/>
+		
+		</p:panelGrid>
+		<p:separator style="background:#FF1493; width: 80%; height: 5px " />
+				
+		<p:commandButton value="#{msg['commons.salvar']}"  actionListener="#{ufBean.gravar}" update="grid, growl" 
+		 action="estado?faces-redirect=true" style="background:#0000CD; color:#FFFFFF" /> &nbsp;
+		 		
+		<p:commandButton style="background:#006400; color:#FFFFFF" action="estado?faces-redirect=true"  value="#{msg['commons.voltar']}" 
+		immediate="true" />&nbsp;
+		
+		<p:commandButton value="limpar" type="reset" style="color: red"/>
+	</h:form>
+	<p:separator style="background:#FF1493; width: 90%; height: 5px " />
+<h:form >	
+	<p:dataTable value="#{ufBean.estados.cidades}" var="cid" id="listagem">
+                    <p:column headerText="#{msg['page.estados.label.id']}"  styleClass="alinhamento" >
+						<p:outputLabel value="#{cid.id}" />
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['page.estados.label.nome']}"  styleClass="alinhamento" >
+						<p:outputLabel value="#{cid.nome}" />
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['page.cidades.label.populacao']}" styleClass="alinhamento" >
+                        <p:outputLabel value="#{cid.populacao}" />
+                    </p:column>
+                        
+                     <p:column headerText="#{msg['page.cidades.label.dataConstituicao']}" styleClass="alinhamento" >
+                        <p:outputLabel value="#{cid.dataConstituicao}" >
+                        	<f:convertDateTime pattern="dd/MM/yyyy" />
+                        </p:outputLabel>
+                    </p:column>
+                     
+                     <p:column headerText="#{msg['page.cidades.label.pip']}" styleClass="alinhamento" >
+                        <p:outputLabel value="#{cid.pib}" />
+                    </p:column>
+                    <p:column headerText="#{msg['page.cidades.label.estados']}" styleClass="alinhamento" >
+                        <p:outputLabel value="#{cid.estado.id}" />
+                    </p:column>
+                        
+                              
+                      <p:column headerText="#{msg['commons.editar']}">
+									<f:facet name="header">
+										<h:outputText value="#{msg['commons.editar']}" />
+									</f:facet>
+				
+									<p:commandLink action="cidadeEditar?faces-redirect=true" ajax="false">
+									<center><p:graphicImage value="/imagens/editar.png" width="36" height="36"/></center>
+									<f:setPropertyActionListener target="#{cidadeBean.cidade}" value="#{cid}" />
+									<!-- <f:param name="id" value="#{estados.id}" /> -->
+									</p:commandLink>
+						</p:column>
+						
+					 <p:column headerText="#{msg['commons.excluir']}">
+                        <p:commandLink  action="#{cidadeBean.excluir}" update="listagem" >
+                        <f:setPropertyActionListener target="#{cidadeBean.cidade}" value="#{cid.id}" />
+                        <p:confirm header="Exclusao de usuario" message="Deseja realmente excluir esse Usuario?" icon="ui-icon-alert" />
+                        <center><p:graphicImage value="/imagens/delete.png" width="36" height="36"/></center>
+                        </p:commandLink>
+                      </p:column>	
+                </p:dataTable>
+                
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" >
+                <p:commandButton value="Sim" style="color: red" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                 <p:commandButton value="Nao" style="color: blue" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+                
+              <p:commandButton styleClass="ui-priority-primary" action="#{cidadeBean.novo}" ajax="false"
+			 value="#{msg['commons.novo']}"  style="background:#0000CD; color:#FFFFFF">
+			 </p:commandButton>&nbsp;&nbsp;
+			  
+		<p:commandButton style="background:#006400; color:#FFFFFF" action="estado" value="#{msg['commons.voltar']}" />
+</h:form>
+</center>
+	<br />
+		</h:body>
+		
+	   </p:fieldset>
+	   <p:graphicImage value="/imagens/brasil.png" width="1100" height="540"/>
+	  </ui:define>
+	</ui:decorate>
+</html>

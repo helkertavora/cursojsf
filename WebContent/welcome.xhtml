@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Projeto para Web - Fa7</title>
+<link rel="stylesheet" type="text/css"  href="css/estilo.css"/>  
+</h:head>
+<h:body>
+ <p:layout fullPage="true">
+ 	<p:layoutUnit position="west" size="245" style="background:#800080">
+ 	 <h:form>
+ 	  <p:menu>
+ 	   <p:submenu label="Menu Project" style="letter-spacing: 2px; color: black;" >
+ 	    <p:menuitem value="Home Page" action="welcome?faces-redirect=true"/>
+ 	    <p:menuitem value="#{msg['page.ajuda.title']}"  action="ajuda?faces-redirect=true"/>
+ 	    <p:menuitem value="#{msg['page.guess.title']}" action="guess?faces-redirect=true" actionListener="#{guessBean.init}" />
+ 	    <p:menuitem value="#{msg['page.usuarios.title']}" action="usuarios?faces-redirect=true" ajax="false"/>
+ 	    <p:menuitem value="#{msg['page.number.title']}"  action="number?faces-redirect=true"/>
+ 	    <p:menuitem value="#{msg['page.jogovelha.title']}" action="jogo?faces-redirect=true"/>
+ 	    <p:menuitem value="#{msg['page.estados.label.mestre']}"  action="estado?faces-redirect=true"/>
+ 	    <p:menuitem value="#{msg['page.logout.title']}" action="logout?faces-redirect=true"/>
+ 	   </p:submenu>
+ 	  </p:menu>
+ 	  <p:separator style="background:#800080; width: 99%; height: 1px " />
+ 	  <p:graphicImage value="/imagens/fa7.png" width="235" height="300"/>
+ 	 </h:form>
+ 	</p:layoutUnit>
+ 	<p:layoutUnit position="center" >
+ 		<ui:insert name="centro">
+ 		<center>
+ 		<br />
+ 		<h1><p:outputLabel value="#{msg['page.trabalhopos.title']}"  styleClass="titu">
+ 		<p:separator style="background:#008000; width: 95%; height: 5px " />
+ 		</p:outputLabel></h1>
+ 		<p:graphicImage value="/imagens/fa7img.png" width="1089" height="480"/>
+ 		</center>
+ 		</ui:insert>
+ 	</p:layoutUnit>
+ </p:layout>
+</h:body>
+</html>

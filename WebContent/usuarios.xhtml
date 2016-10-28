@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="welcome.xhtml">
+	<ui:define name="centro"> 
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"  href="css/estilo.css"/>  
+	<title>#{msg['page.usuarios.title']}</title>
+</h:head>
+<p:fieldset legend="#{msg['page.usuarios.title']}" toggleable="true">
+<h:body>
+<center>	
+<h:form >
+	<p:dataTable value="#{usuarioBean.listaUsuarios}" var="usuario" id="listagem">
+                    <p:column headerText="#{msg['page.usuarios.label.cpf']}"  styleClass="alinhamento" >
+                        <h:commandLink action="usuariosEditar">
+						<p:outputLabel value="#{usuario.cpf}"
+						converter="converters.CpfConverter" />
+						<f:setPropertyActionListener target="#{usuarioBean.usuario}"
+						value="#{usuario}" />
+					</h:commandLink>
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['page.usuarios.label.nomeReduzido']}" styleClass="alinhamento" >
+                        <p:outputLabel value="#{usuario.nomeReduzido}" />
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['page.usuarios.label.email']}" styleClass="alinhamento">
+                      <h:outputLink value="mailto:#{usuario.email}">
+                        <p:outputLabel value="#{usuario.email}"/>
+                       </h:outputLink> 
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['page.usuarios.label.cep']}" styleClass="alinhamento">
+                        <p:outputLabel value="#{usuario.cep}" converter="converters.CepConverter" />
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['page.usuarios.label.dataNascimento']}"  styleClass="alinhamento">
+                        <p:outputLabel value="#{usuario.dataNascimento}" >
+                        	<f:convertDateTime pattern="dd/MM/yyyy" />
+                        </p:outputLabel>	
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['commons.excluir']}">
+                        <p:commandLink  action="#{usuarioBean.excluir}" update="listagem" >
+                        <f:setPropertyActionListener target="#{usuarioBean.usuario}" value="#{usuario}" />
+                        <p:confirm header="Exclusao de usuario" message="Deseja realmente excluir esse Usuario?" icon="ui-icon-alert" />
+                        <center><p:graphicImage value="/imagens/delete.png" width="36" height="36"/></center>
+                        </p:commandLink>
+                      </p:column>
+                         
+                      <p:column headerText="#{msg['commons.exibir']}">
+									<f:facet name="header">
+										<h:outputText value="#{msg['commons.exibir']}" />
+									</f:facet>
+									<h:link  outcome="usuariosExibir?faces-redirect=true" >
+									<center><p:graphicImage value="/imagens/exibir.png" width="36" height="36"/></center>
+									<f:param name="id" value="#{usuario.id}" />
+									</h:link>
+						</p:column>
+                </p:dataTable>
+                
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" >
+                <p:commandButton value="Sim" style="color: red" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                 <p:commandButton value="Nao" style="color: blue" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+                
+             
+		
+		<hr />
+		<p:commandButton styleClass="ui-priority-primary" action="#{usuarioBean.novo}" ajax="false"
+			 value="#{msg['commons.novo']}"  style="background:#0000CD; color:#FFFFFF"/>&nbsp;&nbsp;
+		<p:commandButton style="background:#006400; color:#FFFFFF" action="index" value="#{msg['commons.voltar']}" />
+	</h:form> 
+</center>
+	<br />
+		</h:body>
+	   </p:fieldset>
+	   <p:graphicImage value="/imagens/usuariolistar.png" width="1100" height="540"/>
+	  </ui:define>
+	</ui:decorate>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="welcome.xhtml">
+	<ui:define name="centro"> 
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"  href="css/estilo.css"/>  
+	<title>#{msg['page.usuarios.title']}</title>
+</h:head>
+<p:fieldset legend="#{msg['page.estados.title']}" toggleable="true">
+<h:body>
+<center>	
+<h:form >
+	<p:dataTable value="#{ufBean.listaEstados}" var="estados" id="listagem">
+                    <p:column headerText="#{msg['page.estados.label.id']}"  styleClass="alinhamento" >
+						<p:outputLabel value="#{estados.id}" />
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['page.estados.label.nome']}"  styleClass="alinhamento" >
+						<p:outputLabel value="#{estados.nome}" />
+                    </p:column>
+                    
+                    <p:column headerText="#{msg['page.estados.label.sigla']}" styleClass="alinhamento" >
+                        <p:outputLabel value="#{estados.sigla}" />
+                    </p:column>
+                        
+                      <p:column headerText="#{msg['commons.editar']}">
+									<f:facet name="header">
+										<h:outputText value="#{msg['commons.editar']}" />
+									</f:facet>
+									<!-- <h:link  outcome="estadoEditar?faces-redirect=true" > -->
+									<h:commandLink action="estadoEditar">
+									<center><p:graphicImage value="/imagens/editar.png" width="36" height="36"/></center>
+									<f:setPropertyActionListener target="#{ufBean.estados}" value="#{estados}" />
+									<!-- <f:param name="id" value="#{estados.id}" /> -->
+									</h:commandLink>
+						</p:column>
+                </p:dataTable>
+		<hr />
+		<p:commandButton styleClass="ui-priority-primary" action="#{ufBean.novo}" ajax="false"
+			 value="#{msg['commons.novo']}"  style="background:#0000CD; color:#FFFFFF"/>&nbsp;&nbsp;
+		<p:commandButton style="background:#006400; color:#FFFFFF" action="welcome" value="#{msg['commons.voltar']}" />
+	</h:form> 
+</center>
+	<br />
+		</h:body>
+	   </p:fieldset>
+	   <p:graphicImage value="/imagens/brasil.png" width="1100" height="540"/>
+	  </ui:define>
+	</ui:decorate>
+</html>

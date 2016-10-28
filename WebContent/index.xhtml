@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="welcome.xhtml">
+	<ui:define name="centro"> 
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"  href="css/estilo.css"/>  
+	<title>#{msg['page.index.title']}</title>
+</h:head>
+<p:fieldset legend="#{msg['page.index.title']}" toggleable="true">
+<h:body>
+<center>
+	<h:outputText value="#{msg['page.index.title']}" />
+    <h:form>
+        <h:commandLink action="ajuda?faces-redirect=true"
+        	value="#{msg['page.ajuda.title']}" /><br/>
+        <h:commandLink action="#{guessBean.init}"
+        	value="#{msg['page.guess.title']}" /><br/>
+        	
+        <h:commandLink action="usuarios?faces-redirect=true"
+        	value="#{msg['page.usuarios.title']}" /><br/>
+        	
+        <h:commandLink action="logout?faces-redirect=true"
+        	value="#{msg['page.logout.title']}" /><br/>
+        	
+        <h:commandLink action="number?faces-redirect=true"
+        	value="#{msg['page.number.title']}" /><br/>
+        	
+        <h:commandLink action="jogo?faces-redirect=true"
+        	value="jogo da velha" /><br/>	
+    </h:form>
+</center>
+	<br />
+		</h:body>
+	   </p:fieldset>
+	   <p:graphicImage value="/imagens/jailson.png" width="1100" height="540"/>
+	  </ui:define>
+	</ui:decorate>
+</html>

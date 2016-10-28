@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="welcome.xhtml">
+	<ui:define name="centro"> 
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"  href="css/estilo.css"/>  
+	<title>#{msg['page.usuarios.title']}</title>
+</h:head>
+<p:fieldset legend="#{msg['page.usuarios.title']}" toggleable="true">
+<h:body>
+<center>
+	<f:metadata>
+		<f:viewParam name="id" value="#{usuarioBean.usuario.id}" />
+		<f:event type="preRenderView" listener="#{usuarioBean.exibir}" />
+	</f:metadata>
+	<h:panelGrid columns="2">
+		<h:outputText value="#{msg['page.usuarios.label.id']}:" />
+		<h:outputText value="#{usuarioBean.usuario.id}" />
+		<h:outputText value="#{msg['page.usuarios.label.cpf']}:" />
+		<h:outputText value="#{usuarioBean.usuario.cpf}">
+			<f:converter converterId="converters.CpfConverter" />
+		</h:outputText>
+		<h:outputText value="#{msg['page.usuarios.label.nomeReduzido']}:" />
+		<h:outputText value="#{usuarioBean.usuario.nomeReduzido}" />
+		<h:outputText value="#{msg['page.usuarios.label.nomeCompleto']}:" />
+		<h:outputText value="#{usuarioBean.usuario.nomeCompleto}" />
+		
+		<h:outputText value="#{msg['page.usuarios.label.email']}:" />
+		<h:outputText value="#{usuarioBean.usuario.email}" />
+		
+		<h:outputText value="#{msg['page.usuarios.label.cep']}:" />
+		<h:outputText value="#{usuarioBean.usuario.cep}" converter="converters.CepConverter" />
+		
+		<h:outputText value="#{msg['page.usuarios.label.dataNascimento']}:" />
+		<h:outputText value="#{usuarioBean.usuario.dataNascimento}">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</h:outputText>
+	</h:panelGrid>
+	<hr />
+	<h:button outcome="usuarios"  class="btn btn-info"  value="#{msg['commons.voltar']}" />
+</center>
+	<br />
+		</h:body>
+	   </p:fieldset>
+	   <p:graphicImage value="/imagens/exibir.png" width="1100" height="540"/>
+	  </ui:define>
+	</ui:decorate>
+</html>

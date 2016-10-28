@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:decorate template="welcome.xhtml">
+	<ui:define name="centro">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"  href="css/estilo.css"/>  
+	<title>#{msg['page.usuariosEditar.title']}</title>
+</h:head>
+<p:fieldset legend="#{msg['page.usuariosEditar.title']}" toggleable="true">
+<h:body>
+<center>
+<p:messages globalOnly="true" errorStyle="color:red"/>
+	
+	<h:form id="usuarioForm">
+	<h:inputHidden value="#{usuarioBean.usuario.id}" />
+	 <p:growl id="growl"/>	
+	  <p:panelGrid columns="3" id="grid" >
+		<p:outputLabel value="#{msg['page.usuarios.label.id']}:" />
+		<p:inputText id="id" disabled="true" style="width:15%" />
+		<br />
+		<h:outputLabel for="cpfInput"
+				value="#{msg['page.usuarios.label.cpf']}:" />
+		<p:inputText id="cpfInput" value="#{usuarioBean.usuario.cpf}" 
+				converter="converters.CpfConverter" required="true">
+				<f:validator validatorId="validators.CpfValidator" />
+				</p:inputText>
+		<p:message for="cpfInput" />
+		
+		<h:outputLabel for="nomeReduzidoInput"
+				value="#{msg['page.usuarios.label.nomeReduzido']}:" />
+		<p:inputText id="nomeReduzidoInput"  value="#{usuarioBean.usuario.nomeReduzido}" required="true" />
+		<p:message for="nomeReduzidoInput"/>
+		
+		<h:outputLabel for="nomeCompletoInput"
+				value="#{msg['page.usuarios.label.nomeCompleto']}:" />
+			<p:inputTextarea id="nomeCompletoInput" 
+				value="#{usuarioBean.usuario.nomeCompleto}" rows="5" cols="20" required="true"/>
+		<p:message for="nomeCompletoInput"/>
+		
+		<h:outputLabel for="dataNascimentoInput"
+				value="#{msg['page.usuarios.label.dataNascimento']}:" />
+			<p:inputMask id="dataNascimentoInput"  mask="99/99/9999"
+			value="#{usuarioBean.usuario.dataNascimento}"  required="true">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</p:inputMask>
+		<p:message for="dataNascimentoInput"/>
+		
+		<h:outputLabel for="cepInput"
+				value="#{msg['page.usuarios.label.cep']}:" />
+			<p:inputMask id="cepInput" value="#{usuarioBean.usuario.cep}" converter="converters.CepConverter" 
+			mask="99999-999" required="true">
+			 <f:validator validatorId="validators.CepValidator" />
+			</p:inputMask>
+			<p:message for="cepInput"/>
+		
+		<h:outputLabel for="emailInput"
+				value="#{msg['page.usuarios.label.email']}:" />
+			<p:inputText id="emailInput" value="#{usuarioBean.usuario.email}"  required="true"/>
+			<p:message for="emailInput"/>
+			
+		<h:outputLabel for="senhaInput"
+				value="#{msg['page.usuarios.label.senha']}:" />
+			<p:inputText id="senhaInput" value="#{usuarioBean.usuario.senha}" required="true" />
+			<p:message for="senhaInput"/>	
+		
+		</p:panelGrid>
+		<p:separator style="background:#FF1493; width: 80%; height: 5px " />
+				
+		<p:commandButton value="#{msg['commons.salvar']}"  actionListener="#{usuarioBean.gravar}" update="grid, growl" 
+		 action="usuarios?faces-redirect=true" style="background:#0000CD; color:#FFFFFF" /> &nbsp;
+		 		
+		<p:commandButton style="background:#006400; color:#FFFFFF" action="usuarios?faces-redirect=true"  value="#{msg['commons.voltar']}" 
+		immediate="true" />&nbsp;
+		
+		<p:commandButton value="limpar" type="reset" style="color: red"/>
+	</h:form>
+	
+</center>
+	<br />
+		</h:body>
+		
+	   </p:fieldset>
+	   <p:graphicImage value="/imagens/usuarioeditar.png" width="1100" height="540"/>
+	  </ui:define>
+	</ui:decorate>
+</html>
